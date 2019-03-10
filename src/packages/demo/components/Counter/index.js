@@ -1,7 +1,8 @@
 import React from "react";
-import Increase from "../actions/Increase";
-import { $count } from "../selectors";
+import Increase from "../../actions/Increase";
+import { $count } from "../../selectors";
 import { createAction, useValue } from "_";
+import container from "./container";
 
 function Counter() {
   const [count] = useValue([$count]);
@@ -27,4 +28,4 @@ function Counter() {
   );
 }
 
-export default Counter;
+export default container(Counter);
