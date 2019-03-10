@@ -1,24 +1,27 @@
 import { useContext, useCallback } from "react";
 import { context, Context } from "./components/AppStore";
 
-export const useValue = ($selector, defaultValue) => {
+export const useValue = selectorList => {
   useContext(Context);
   const { state } = context.value;
-  let value;
-  if (typeof $selector === "string") {
-    value = state[$selector];
-  } else {
-    value = $selector(state);
-  }
-  if (value === undefined) {
-    return defaultValue;
-  }
-  return value;
+  return selectorList.map($selector => {
+    return $selector(state);
+  });
 };
 
-export const useAction = callback => {
+export const createAction = callbackList => {
   const contextValue = context.value;
-  return useCallback((...props) => {
-    callback(contextValue, ...props);
+  return callbackList.map(callback => {
+    return useCallback((...props) => {
+      callback(contextValue, ...props);
+    });
   });
+};
+
+export const createSelector = (name, defaultValue) => {
+  return state => {
+    if (!state) return name;
+    if (name in state) return state[name];
+    return defaultValue;
+  };
 };

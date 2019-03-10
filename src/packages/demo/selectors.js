@@ -1,1 +1,5 @@
-export const $count = 'count';
+import { createSelector } from "_";
+export const $count = createSelector(
+  "count",
+  0
+);

@@ -1,11 +1,11 @@
 import React from "react";
 import Increase from "../actions/Increase";
 import { $count } from "../selectors";
-import { useAction, useValue } from "_";
+import { createAction, useValue } from "_";
 
 function Counter() {
-  const inc = useAction(Increase);
-  const count = useValue($count, 0);
+  const [count] = useValue([$count]);
+  const [inc] = createAction([Increase]);
   return (
     <div>
       <h1>{count}</h1>
