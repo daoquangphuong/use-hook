@@ -21,7 +21,7 @@ function AppStore({
   }, initialState);
   const setState = useCallback((callback = state => state) => {
     dispatch({ type: "setState", payload: callback });
-  });
+  }, []);
   const log = useCallback(
     (...params) => {
       if (!debug) return;

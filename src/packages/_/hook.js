@@ -6,7 +6,7 @@ export const createAction = callbackList => {
     return useCallback((...props) => {
       context.log("Action:", callback.name, props);
       callback(context, ...props);
-    });
+    }, []);
   });
 };
 
