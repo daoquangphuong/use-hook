@@ -1,5 +1,6 @@
 import { $count } from "../selectors";
 
-export default function Increase({ state, updateState }, number) {
-  updateState({ [$count()]: ["set", $count(state) + number] });
+export default function Increase(context, number) {
+  const { update } = context;
+  update({ [$count()]: x => (x || 0) + number });
 }
